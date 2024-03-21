@@ -54,10 +54,6 @@
       },
       "overrides": [
         {
-          "files": ["*.module.ts"],
-          "rules": { "@typescript-eslint/no-extraneous-class": "off" }
-        },
-        {
           "files": ["*.ts"],
           "excludedFiles": ["*.spec.ts"],
           "extends": ["plugin:@typescript-eslint/strict-type-checked"],
@@ -84,6 +80,10 @@
               }
             ]
           }
+        },
+        {
+          "files": ["*.module.ts"],
+          "rules": { "@typescript-eslint/no-extraneous-class": "off" }
         }
       ]
     },

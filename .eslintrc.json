@@ -56,6 +56,34 @@
         {
           "files": ["*.module.ts"],
           "rules": { "@typescript-eslint/no-extraneous-class": "off" }
+        },
+        {
+          "files": ["*.ts"],
+          "excludedFiles": ["*.spec.ts"],
+          "extends": ["plugin:@typescript-eslint/strict-type-checked"],
+          "rules": {
+            "@typescript-eslint/member-ordering": [
+              "error",
+              { "default": ["signature", "field", "constructor", "method"] }
+            ],
+            "lines-between-class-members": "off",
+            "@typescript-eslint/lines-between-class-members": [
+              "error",
+              {
+                "enforce": [
+                  { "blankLine": "always", "prev": "*", "next": "method" }
+                ]
+              }
+            ],
+            "functional/prefer-immutable-types": [
+              "error",
+              {
+                "enforcement": "ReadonlyShallow",
+                "ignoreClasses": true,
+                "ignoreInferredTypes": true
+              }
+            ]
+          }
         }
       ]
     },

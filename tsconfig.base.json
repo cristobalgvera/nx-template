@@ -1,4 +1,5 @@
 {
+  "extends": "./tsconfig.strict.json",
   "compileOnSave": false,
   "compilerOptions": {
     "rootDir": ".",
@@ -13,6 +14,7 @@
     "lib": ["es2020", "dom"],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
+    "removeComments": true,
     "baseUrl": ".",
     "paths": {}
   },

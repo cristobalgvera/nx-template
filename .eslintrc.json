@@ -1,7 +1,19 @@
 {
   "root": true,
   "ignorePatterns": ["**/*"],
-  "plugins": ["@nx"],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "project": ["./tsconfig.*?.json"]
+  },
+  "plugins": ["@nx", "@typescript-eslint/eslint-plugin", "functional"],
+  "extends": [
+    "eslint:recommended",
+    "plugin:sonarjs/recommended",
+    "plugin:prettier/recommended"
+  ],
+  "rules": {
+    "no-console": "error"
+  },
   "overrides": [
     {
       "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
@@ -23,19 +35,54 @@
     },
     {
       "files": ["*.ts", "*.tsx"],
-      "extends": ["plugin:@nx/typescript"],
-      "rules": {}
-    },
-    {
-      "files": ["*.js", "*.jsx"],
-      "extends": ["plugin:@nx/javascript"],
-      "rules": {}
+      "extends": [
+        "plugin:@nx/typescript",
+        "plugin:@typescript-eslint/recommended",
+        "plugin:@typescript-eslint/stylistic-type-checked"
+      ],
+      "rules": {
+        "@typescript-eslint/interface-name-prefix": "off",
+        "@typescript-eslint/explicit-function-return-type": "off",
+        "@typescript-eslint/explicit-module-boundary-types": "off",
+        "@typescript-eslint/no-explicit-any": "error",
+        "@typescript-eslint/no-unused-vars": "error",
+        "@typescript-eslint/prefer-readonly": "error",
+        "@typescript-eslint/consistent-type-definitions": ["error", "type"],
+        "no-return-await": "off",
+        "@typescript-eslint/return-await": ["error", "in-try-catch"],
+        "functional/readonly-type": "error"
+      },
+      "overrides": [
+        {
+          "files": ["*.module.ts"],
+          "rules": { "@typescript-eslint/no-extraneous-class": "off" }
+        }
+      ]
     },
     {
       "files": ["*.spec.ts", "*.spec.tsx", "*.spec.js", "*.spec.jsx"],
       "env": {
         "jest": true
       },
+      "extends": [
+        "plugin:jest/recommended",
+        "plugin:jest/style",
+        "plugin:jest-extended/all",
+        "plugin:jest-formatting/strict"
+      ],
+      "rules": {
+        "@typescript-eslint/no-floating-promises": "error",
+        "@typescript-eslint/no-explicit-any": "off",
+        "sonarjs/no-identical-functions": "off",
+        "sonarjs/no-duplicate-string": "off"
+      }
+    },
+    {
+      "files": ["*.js", "*.jsx"],
+      "parserOptions": {
+        "project": false
+      },
+      "extends": ["plugin:@nx/javascript"],
       "rules": {}
     }
   ]
